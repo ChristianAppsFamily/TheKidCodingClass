@@ -1,20 +1,34 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-    <title id="title">The Kid Coding Class robot mark</title>
-    <desc id="desc">A smiling purple coding robot with orange antenna and yellow ears.</desc>
-    <rect width="512" height="512" rx="96" fill="#FFF9F0"/>
-    <ellipse cx="256" cy="260" rx="190" ry="175" fill="#F7ECDC"/>
-    <rect x="238" y="122" width="36" height="72" rx="18" fill="#16305F"/>
-    <circle cx="256" cy="104" r="46" fill="#E95625"/>
-    <ellipse cx="274" cy="82" rx="18" ry="11" transform="rotate(38 274 82)" fill="#FF8B61" opacity=".72"/>
-    <rect x="78" y="215" width="58" height="92" rx="29" fill="#FFB62E"/>
-    <rect x="376" y="215" width="58" height="92" rx="29" fill="#FFB62E"/>
-    <rect x="112" y="158" width="288" height="230" rx="72" fill="#7067DE"/>
-    <path d="M119 316c18 52 71 78 157 78h47c54 0 88-10 102-29-19 49-62 74-130 74h-74c-72 0-111-41-102-123Z" fill="#544CC5" opacity=".55"/>
-    <rect x="151" y="200" width="210" height="145" rx="44" fill="#142B58"/>
-    <path d="M181 264c0-18 13-32 29-32 17 0 30 14 30 32" stroke="#FFF9F0" stroke-width="22" stroke-linecap="round"/>
-    <path d="M272 264c0-18 13-32 30-32 16 0 29 14 29 32" stroke="#FFF9F0" stroke-width="22" stroke-linecap="round"/>
-    <path d="M223 309c16 30 50 30 66 0" stroke="#FFF9F0" stroke-width="22" stroke-linecap="round"/>
-    <rect x="397" y="142" width="28" height="76" rx="14" transform="rotate(15 397 142)" fill="#7067DE"/>
-    <rect x="435" y="173" width="28" height="76" rx="14" transform="rotate(40 435 173)" fill="#E95625"/>
-    <rect x="434" y="236" width="28" height="76" rx="14" transform="rotate(78 434 236)" fill="#1D9E75"/>
+    <title id="title">The Kid Coding Class favicon</title>
+    <desc id="desc">A smiling purple robot head with an orange antenna, yellow side caps, and three colorful celebration marks.</desc>
+    <defs>
+        <linearGradient id="head" x1="93" y1="187" x2="397" y2="400" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#766BE4"/>
+            <stop offset="1" stop-color="#5F55C9"/>
+        </linearGradient>
+        <linearGradient id="screen" x1="155" y1="216" x2="354" y2="330" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#172F61"/>
+            <stop offset="1" stop-color="#12234A"/>
+        </linearGradient>
+        <linearGradient id="antenna" x1="218" y1="99" x2="280" y2="157" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#F5642B"/>
+            <stop offset="1" stop-color="#D9481C"/>
+        </linearGradient>
+    </defs>
+    <g transform="translate(26 56)">
+        <rect x="216" y="63" width="32" height="60" rx="16" fill="#183264"/>
+        <circle cx="232" cy="48" r="36" fill="url(#antenna)"/>
+        <ellipse cx="245" cy="35" rx="12" ry="8" transform="rotate(37 245 35)" fill="#FF9C6A" opacity=".8"/>
+        <rect x="50" y="200" width="58" height="105" rx="29" fill="#FAC765"/>
+        <rect x="352" y="200" width="58" height="105" rx="29" fill="#FAC765"/>
+        <rect x="89" y="142" width="282" height="218" rx="70" fill="url(#head)"/>
+        <path d="M96 272c14 43 62 66 144 66h47c43 0 72-6 87-19-20 38-59 58-117 59h-63c-66 0-99-34-98-106Z" fill="#5148BE" opacity=".45"/>
+        <rect x="127" y="188" width="207" height="129" rx="38" fill="url(#screen)"/>
+        <path d="M158 242c0-16 12-27 27-27 15 0 27 11 27 27" stroke="#FFF9F0" stroke-width="17" stroke-linecap="round"/>
+        <path d="M248 242c0-16 12-27 27-27 15 0 27 11 27 27" stroke="#FFF9F0" stroke-width="17" stroke-linecap="round"/>
+        <path d="M203 278c18 25 38 25 56 0" stroke="#FFF9F0" stroke-width="17" stroke-linecap="round"/>
+        <rect x="372" y="116" width="20" height="55" rx="10" transform="rotate(22 372 116)" fill="#6E66DE"/>
+        <rect x="405" y="132" width="20" height="55" rx="10" transform="rotate(41 405 132)" fill="#E95723"/>
+        <rect x="412" y="184" width="20" height="55" rx="10" transform="rotate(75 412 184)" fill="#1D9E75"/>
+    </g>
 </svg>
