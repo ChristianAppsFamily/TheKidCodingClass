@@ -1,0 +1,20 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+    <title id="title">The Kid Coding Class robot mark</title>
+    <desc id="desc">A smiling purple coding robot with orange antenna and yellow ears.</desc>
+    <rect width="512" height="512" rx="96" fill="#FFF9F0"/>
+    <ellipse cx="256" cy="260" rx="190" ry="175" fill="#F7ECDC"/>
+    <rect x="238" y="122" width="36" height="72" rx="18" fill="#16305F"/>
+    <circle cx="256" cy="104" r="46" fill="#E95625"/>
+    <ellipse cx="274" cy="82" rx="18" ry="11" transform="rotate(38 274 82)" fill="#FF8B61" opacity=".72"/>
+    <rect x="78" y="215" width="58" height="92" rx="29" fill="#FFB62E"/>
+    <rect x="376" y="215" width="58" height="92" rx="29" fill="#FFB62E"/>
+    <rect x="112" y="158" width="288" height="230" rx="72" fill="#7067DE"/>
+    <path d="M119 316c18 52 71 78 157 78h47c54 0 88-10 102-29-19 49-62 74-130 74h-74c-72 0-111-41-102-123Z" fill="#544CC5" opacity=".55"/>
+    <rect x="151" y="200" width="210" height="145" rx="44" fill="#142B58"/>
+    <path d="M181 264c0-18 13-32 29-32 17 0 30 14 30 32" stroke="#FFF9F0" stroke-width="22" stroke-linecap="round"/>
+    <path d="M272 264c0-18 13-32 30-32 16 0 29 14 29 32" stroke="#FFF9F0" stroke-width="22" stroke-linecap="round"/>
+    <path d="M223 309c16 30 50 30 66 0" stroke="#FFF9F0" stroke-width="22" stroke-linecap="round"/>
+    <rect x="397" y="142" width="28" height="76" rx="14" transform="rotate(15 397 142)" fill="#7067DE"/>
+    <rect x="435" y="173" width="28" height="76" rx="14" transform="rotate(40 435 173)" fill="#E95625"/>
+    <rect x="434" y="236" width="28" height="76" rx="14" transform="rotate(78 434 236)" fill="#1D9E75"/>
+</svg>
