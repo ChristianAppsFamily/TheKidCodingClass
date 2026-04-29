@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Kid Coding Class — Where Kids Build Real Apps Using AI Tools</title>
+    <meta name="description" content="Online coding classes for kids ages 9-17. Build real apps and websites using AI tools. Charter approved, homeschool friendly.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'boogaloo': ['Boogaloo', 'cursive'],
+                        'quicksand': ['Quicksand', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-purple': '#7F77DD',
+                        'brand-coral': '#D85A30',
+                        'brand-yellow': '#FAC765',
+                        'brand-teal': '#1D9E75',
+                        'brand-cream': '#FFF9F0',
+                        'brand-dark': '#2D2A4A',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @keyframes float-delayed {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes float-delayed-2 {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-14px); }
+        }
+
+        @keyframes float-delayed-3 {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes bounce-in {
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+            60% { opacity: 1; transform: translateY(-5px) scale(1.02); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes slide-up {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-float-1 { animation: float-delayed 3.5s ease-in-out infinite 0.2s; }
+        .animate-float-2 { animation: float-delayed-2 4s ease-in-out infinite 0.5s; }
+        .animate-float-3 { animation: float-delayed-3 3.2s ease-in-out infinite 0.8s; }
+
+        .animate-bounce-in {
+            animation: bounce-in 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            opacity: 0;
+        }
+
+        .animate-slide-up {
+            animation: slide-up 0.7s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        /* Hover lift effect */
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        /* Button bounce */
+        .btn-bounce {
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+        }
+        .btn-bounce:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .btn-bounce:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF9F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #7F77DD;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6B63C7;
+        }
+
+        /* Blob shapes */
+        .blob-shape {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+
+        /* Intersection Observer animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .stagger-children > *:nth-child(1) { transition-delay: 0.1s; }
+        .stagger-children > *:nth-child(2) { transition-delay: 0.2s; }
+        .stagger-children > *:nth-child(3) { transition-delay: 0.3s; }
+        .stagger-children > *:nth-child(4) { transition-delay: 0.4s; }
+    </style>
+</head>
+<body class="font-quicksand bg-brand-cream text-gray-800 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-brand-cream/95 backdrop-blur-md border-b-4 border-brand-purple/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <span class="font-boogaloo text-2xl sm:text-3xl text-brand-purple group-hover:scale-105 transition-transform">The Kid Coding</span>
+                    <span class="font-boogaloo text-2xl sm:text-3xl text-brand-coral group-hover:scale-105 transition-transform">Class</span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#tracks" class="font-semibold text-gray-700 hover:text-brand-purple transition-colors relative group">
+                        Tracks
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-purple transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#pricing" class="font-semibold text-gray-700 hover:text-brand-purple transition-colors relative group">
+                        Pricing
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-purple transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#how-it-works" class="font-semibold text-gray-700 hover:text-brand-purple transition-colors relative group">
+                        How It Works
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-purple transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#signup" class="btn-bounce inline-flex items-center px-6 py-3 bg-brand-coral text-white font-bold rounded-2xl border-3 border-brand-coral shadow-lg hover:shadow-xl">
+                        Enroll Now! 🚀
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-xl hover:bg-brand-purple/10 transition-colors">
+                    <svg class="w-7 h-7 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-cream border-t-4 border-brand-purple/10">
+            <div class="px-4 py-6 space-y-4">
+                <a href="#tracks" class="block px-4 py-3 rounded-xl font-semibold text-gray-700 hover:bg-brand-purple/10 hover:text-brand-purple transition-colors">Tracks</a>
+                <a href="#pricing" class="block px-4 py-3 rounded-xl font-semibold text-gray-700 hover:bg-brand-purple/10 hover:text-brand-purple transition-colors">Pricing</a>
+                <a href="#how-it-works" class="block px-4 py-3 rounded-xl font-semibold text-gray-700 hover:bg-brand-purple/10 hover:text-brand-purple transition-colors">How It Works</a>
+                <a href="#signup" class="block px-4 py-3 bg-brand-coral text-white font-bold rounded-2xl text-center btn-bounce">Enroll Now! 🚀</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
+        <!-- Background decorations -->
+        <div class="absolute top-20 left-10 w-32 h-32 bg-brand-yellow/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-40 h-40 bg-brand-teal/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-40 right-20 w-24 h-24 bg-brand-coral/20 rounded-full blur-2xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <!-- Badge -->
+                <div class="animate-bounce-in inline-flex items-center gap-2 px-5 py-2.5 bg-white rounded-full border-3 border-brand-purple shadow-md mb-8">
+                    <span class="text-lg">🎯</span>
+                    <span class="font-bold text-brand-purple">Ages 9–17 · Online · Charter Approved</span>
+                </div>
+
+                <!-- Headline -->
+                <h1 class="animate-bounce-in delay-100 font-boogaloo text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-brand-purple leading-tight mb-6">
+                    Where Kids Build <span class="text-brand-coral">Real Apps</span> Using AI Tools!
+                </h1>
+
+                <!-- Subtext -->
+                <p class="animate-bounce-in delay-200 text-xl sm:text-2xl text-gray-600 max-w-2xl mx-auto mb-10 font-medium leading-relaxed">
+                    No experience needed. Your kid will build something real — not a tutorial. Something they came up with. 💡
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="animate-bounce-in delay-300 flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+                    <a href="#signup" class="btn-bounce inline-flex items-center gap-2 px-8 py-4 bg-brand-coral text-white text-lg font-bold rounded-2xl border-4 border-brand-coral shadow-xl hover:shadow-2xl">
+                        Reserve a Spot! 🎉
+                    </a>
+                    <a href="#tracks" class="btn-bounce inline-flex items-center gap-2 px-8 py-4 bg-transparent text-brand-purple text-lg font-bold rounded-2xl border-4 border-brand-purple shadow-lg hover:bg-brand-purple hover:text-white transition-colors">
+                        See the Tracks 👀
+                    </a>
+                </div>
+
+                <!-- Floating Pill Badges -->
+                <div class="animate-bounce-in delay-400 flex flex-wrap justify-center gap-3 sm:gap-4">
+                    <div class="animate-float px-5 py-2.5 bg-brand-teal text-white font-bold rounded-full border-3 border-white shadow-lg text-sm sm:text-base">
+                        🛠️ Build Apps
+                    </div>
+                    <div class="animate-float-1 px-5 py-2.5 bg-brand-purple text-white font-bold rounded-full border-3 border-white shadow-lg text-sm sm:text-base">
+                        🌐 Make Websites
+                    </div>
+                    <div class="animate-float-2 px-5 py-2.5 bg-brand-yellow text-brand-dark font-bold rounded-full border-3 border-white shadow-lg text-sm sm:text-base">
+                        🤖 Use AI Tools
+                    </div>
+                    <div class="animate-float-3 px-5 py-2.5 bg-brand-coral text-white font-bold rounded-full border-3 border-white shadow-lg text-sm sm:text-base">
+                        🚀 Launch It Live
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1 — Two Age Tracks -->
+    <section id="tracks" class="py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block px-4 py-1.5 bg-brand-yellow/30 text-brand-dark font-bold rounded-full text-sm mb-4">Two Age Tracks</span>
+                <h2 class="font-boogaloo text-4xl sm:text-5xl lg:text-6xl text-brand-purple mb-4">Pick the right level!</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Every student builds something real. The track just determines what kind of builder they become.</p>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Junior Builders Card -->
+                <div class="reveal hover-lift bg-brand-teal rounded-[2rem] border-4 border-brand-teal/30 p-8 sm:p-10 text-white relative overflow-hidden">
+                    <!-- Decorative blob -->
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 blob-shape"></div>
+
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-4xl">🧒</span>
+                            <span class="px-4 py-1.5 bg-white/20 rounded-full font-bold text-sm">Ages 9–12</span>
+                        </div>
+                        <h3 class="font-boogaloo text-3xl sm:text-4xl mb-4">Junior Builders</h3>
+                        <p class="text-lg text-white/90 mb-8 leading-relaxed">
+                            Young creators learn the fundamentals of building with AI — websites, simple apps, and digital tools — using guided AI prompting. Super fun and beginner-friendly!
+                        </p>
+
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-0.5">✓</span>
+                                <span class="font-medium">Build a real working website</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-0.5">✓</span>
+                                <span class="font-medium">Create their first simple app</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-0.5">✓</span>
+                                <span class="font-medium">AI prompting basics</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-0.5">✓</span>
+                                <span class="font-medium">Share with family and friends</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Teen Founders Card -->
+                <div class="reveal hover-lift bg-brand-purple rounded-[2rem] border-4 border-brand-purple/30 p-8 sm:p-10 text-white relative overflow-hidden">
+                    <!-- Decorative blob -->
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 blob-shape"></div>
+
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-4xl">🧑‍💻</span>
+                            <span class="px-4 py-1.5 bg-white/20 rounded-full font-bold text-sm">Ages 13–17</span>
+                        </div>
+                        <h3 class="font-boogaloo text-3xl sm:text-4xl mb-4">Teen Founders</h3>
+                        <p class="text-lg text-white/90 mb-8 leading-relaxed">
+                            Older students go deeper — building apps they could actually launch, learning how to turn an idea into a real product using the same AI tools pros use today.
+                        </p>
+
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-0.5">✓</span>
+                                <span class="font-medium">Build and deploy a real app</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-0.5">✓</span>
+                                <span class="font-medium">Use Bolt, Vercel and Supabase</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-0.5">✓</span>
+                                <span class="font-medium">Monetization basics</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-0.5">✓</span>
+                                <span class="font-medium">Launch something the world can see</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2 — Pricing -->
+    <section id="pricing" class="py-20 lg:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block px-4 py-1.5 bg-brand-coral/10 text-brand-coral font-bold rounded-full text-sm mb-4">Pricing</span>
+                <h2 class="font-boogaloo text-4xl sm:text-5xl lg:text-6xl text-brand-purple mb-4">Simple, flexible pricing</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Charter funds accepted. Most homeschool families enroll at zero out-of-pocket cost.</p>
+            </div>
+
+            <!-- Pricing Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto stagger-children">
+                <!-- Drop-In Class -->
+                <div class="reveal hover-lift bg-brand-cream rounded-[2rem] border-4 border-gray-200 p-6 sm:p-8 flex flex-col">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-gray-200 text-gray-700 text-xs font-bold rounded-full">No commitment</span>
+                    </div>
+                    <h3 class="font-boogaloo text-2xl text-brand-dark mb-2">Drop-In Class</h3>
+                    <div class="mb-4">
+                        <span class="text-4xl font-bold text-brand-dark">$25</span>
+                        <span class="text-gray-500 font-medium">/class</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 flex-grow">Try it out before committing. One live 90-minute session with your kid's age group.</p>
+                    <a href="#signup" class="btn-bounce w-full text-center px-6 py-3 bg-white border-3 border-brand-purple text-brand-purple font-bold rounded-xl hover:bg-brand-purple hover:text-white transition-colors">
+                        Try It Out
+                    </a>
+                </div>
+
+                <!-- Full Course (Featured) -->
+                <div class="reveal hover-lift bg-brand-purple rounded-[2rem] border-4 border-brand-purple p-6 sm:p-8 flex flex-col relative transform lg:-translate-y-4 shadow-2xl">
+                    <!-- Popular Badge -->
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+                        <span class="inline-block px-4 py-1.5 bg-brand-yellow text-brand-dark font-bold text-sm rounded-full border-3 border-white shadow-lg">
+                            ⭐ Most Popular
+                        </span>
+                    </div>
+
+                    <div class="mb-4 mt-2">
+                        <span class="inline-block px-3 py-1 bg-white/20 text-white text-xs font-bold rounded-full">Charter approved</span>
+                    </div>
+                    <h3 class="font-boogaloo text-2xl text-white mb-2">Full Course</h3>
+                    <div class="mb-4">
+                        <span class="text-4xl font-bold text-white">$247</span>
+                        <span class="text-white/70 font-medium">/student</span>
+                    </div>
+                    <p class="text-white/90 mb-2 font-semibold">6 weeks</p>
+                    <p class="text-white/80 mb-6 flex-grow">The complete program. Live online classes, project builds, and a finished product at the end.</p>
+                    <a href="#signup" class="btn-bounce w-full text-center px-6 py-3 bg-brand-yellow text-brand-dark font-bold rounded-xl border-3 border-brand-yellow hover:bg-white hover:border-white transition-colors shadow-lg">
+                        Enroll Now!
+                    </a>
+                </div>
+
+                <!-- Self-Paced -->
+                <div class="reveal hover-lift bg-brand-cream rounded-[2rem] border-4 border-gray-200 p-6 sm:p-8 flex flex-col">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-brand-teal/10 text-brand-teal text-xs font-bold rounded-full">Whole family</span>
+                    </div>
+                    <h3 class="font-boogaloo text-2xl text-brand-dark mb-2">Self-Paced</h3>
+                    <div class="mb-4">
+                        <span class="text-4xl font-bold text-brand-dark">$97</span>
+                        <span class="text-gray-500 font-medium">lifetime</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 flex-grow">Go at your own speed. Pre-recorded lessons, all age tracks, learn anytime.</p>
+                    <a href="#signup" class="btn-bounce w-full text-center px-6 py-3 bg-white border-3 border-brand-purple text-brand-purple font-bold rounded-xl hover:bg-brand-purple hover:text-white transition-colors">
+                        Get Access
+                    </a>
+                </div>
+
+                <!-- Sibling Add-On -->
+                <div class="reveal hover-lift bg-brand-cream rounded-[2rem] border-4 border-gray-200 p-6 sm:p-8 flex flex-col">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-brand-coral/10 text-brand-coral text-xs font-bold rounded-full">Family discount</span>
+                    </div>
+                    <h3 class="font-boogaloo text-2xl text-brand-dark mb-2">Sibling Add-On</h3>
+                    <div class="mb-4">
+                        <span class="text-4xl font-bold text-brand-dark">$147</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 flex-grow">Enroll a second child from the same household in the same live cohort.</p>
+                    <a href="#signup" class="btn-bounce w-full text-center px-6 py-3 bg-white border-3 border-brand-purple text-brand-purple font-bold rounded-xl hover:bg-brand-purple hover:text-white transition-colors">
+                        Add Sibling
+                    </a>
+                </div>
+            </div>
+
+            <!-- Charter Note -->
+            <div class="text-center mt-12 reveal">
+                <p class="text-gray-500">
+                    Charter coordinators: contact us for bulk enrollment and vendor approval docs. 
+                    <a href="mailto:hello@thekidcodingclass.com" class="text-brand-purple font-semibold hover:underline">hello@thekidcodingclass.com</a> 📧
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3 — How It Works -->
+    <section id="how-it-works" class="py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block px-4 py-1.5 bg-brand-teal/10 text-brand-teal font-bold rounded-full text-sm mb-4">How It Works</span>
+                <h2 class="font-boogaloo text-4xl sm:text-5xl lg:text-6xl text-brand-purple mb-4">From zero to builder in 4 steps!</h2>
+            </div>
+
+            <!-- Steps Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto stagger-children">
+                <!-- Step 1 -->
+                <div class="reveal hover-lift bg-white rounded-[2rem] border-4 border-brand-yellow p-8 text-center relative">
+                    <div class="w-16 h-16 bg-brand-yellow rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-brand-yellow/30 shadow-lg">
+                        <span class="font-boogaloo text-2xl text-brand-dark">1</span>
+                    </div>
+                    <h3 class="font-boogaloo text-2xl text-brand-dark mb-3">Pick your track</h3>
+                    <p class="text-gray-600">Junior Builders (9–12) or Teen Founders (13–17). Both build real things.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="reveal hover-lift bg-white rounded-[2rem] border-4 border-brand-purple p-8 text-center relative">
+                    <div class="w-16 h-16 bg-brand-purple rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-brand-purple/30 shadow-lg">
+                        <span class="font-boogaloo text-2xl text-white">2</span>
+                    </div>
+                    <h3 class="font-boogaloo text-2xl text-brand-dark mb-3">Enroll and confirm</h3>
+                    <p class="text-gray-600">Sign up below. Charter families submit vendor info — we handle the paperwork.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="reveal hover-lift bg-white rounded-[2rem] border-4 border-brand-teal p-8 text-center relative">
+                    <div class="w-16 h-16 bg-brand-teal rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-brand-teal/30 shadow-lg">
+                        <span class="font-boogaloo text-2xl text-white">3</span>
+                    </div>
+                    <h3 class="font-boogaloo text-2xl text-brand-dark mb-3">Join live online</h3>
+                    <p class="text-gray-600">90-minute sessions, once a week. Zoom link sent before class. No downloads needed.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="reveal hover-lift bg-white rounded-[2rem] border-4 border-brand-coral p-8 text-center relative">
+                    <div class="w-16 h-16 bg-brand-coral rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-brand-coral/30 shadow-lg">
+                        <span class="font-boogaloo text-2xl text-white">4</span>
+                    </div>
+                    <h3 class="font-boogaloo text-2xl text-brand-dark mb-3">Launch something real!</h3>
+                    <p class="text-gray-600">By the end, your kid has a working app or website they built themselves. For real! 🎉</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4 — Email Signup -->
+    <section id="signup" class="py-20 lg:py-28 bg-gradient-to-br from-brand-dark via-brand-purple to-brand-dark relative overflow-hidden">
+        <!-- Decorative elements -->
+        <div class="absolute top-10 left-10 w-32 h-32 bg-brand-yellow/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-10 right-10 w-40 h-40 bg-brand-coral/10 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-purple/20 rounded-full blur-3xl"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12 reveal">
+                <h2 class="font-boogaloo text-4xl sm:text-5xl lg:text-6xl text-white mb-4">Ready to build something?</h2>
+                <p class="text-xl text-white/80 max-w-xl mx-auto">Drop your email and we'll send enrollment info, next cohort dates, and charter vendor docs if you need them.</p>
+            </div>
+
+            <!-- Form -->
+            <div class="reveal bg-white/10 backdrop-blur-sm rounded-[2rem] border-4 border-white/20 p-8 sm:p-10">
+                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-6">
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="parent-name" class="block text-white font-semibold mb-2">Parent's Name</label>
+                            <input type="text" id="parent-name" name="parent_name" required
+                                class="w-full px-5 py-4 rounded-xl border-3 border-white/30 bg-white/10 text-white placeholder-white/50 font-medium focus:outline-none focus:border-brand-yellow focus:bg-white/20 transition-all"
+                                placeholder="Jane Smith">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-white font-semibold mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-5 py-4 rounded-xl border-3 border-white/30 bg-white/10 text-white placeholder-white/50 font-medium focus:outline-none focus:border-brand-yellow focus:bg-white/20 transition-all"
+                                placeholder="jane@example.com">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-bounce w-full sm:w-auto px-10 py-4 bg-brand-yellow text-brand-dark font-bold text-lg rounded-2xl border-4 border-brand-yellow shadow-xl hover:shadow-2xl hover:bg-white hover:border-white transition-colors">
+                        Send Me Info! 📬
+                    </button>
+                </form>
+
+                <p class="text-white/60 text-sm mt-4 text-center sm:text-left">No spam. Just cohort dates, pricing, and charter info. Unsubscribe anytime.</p>
+            </div>
+
+            <!-- Trust Bar -->
+            <div class="reveal mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl py-4 px-4 border-2 border-white/10">
+                    <span class="text-2xl">🏠</span>
+                    <span class="text-white font-semibold text-sm">Homeschool friendly</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl py-4 px-4 border-2 border-white/10">
+                    <span class="text-2xl">📋</span>
+                    <span class="text-white font-semibold text-sm">Charter funds accepted</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl py-4 px-4 border-2 border-white/10">
+                    <span class="text-2xl">👨‍🏫</span>
+                    <span class="text-white font-semibold text-sm">Live instructor online</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl py-4 px-4 border-2 border-white/10">
+                    <span class="text-2xl">🎂</span>
+                    <span class="text-white font-semibold text-sm">Ages 9–17</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <!-- Logo -->
+                <div class="flex items-center justify-center gap-2 mb-4">
+                    <span class="font-boogaloo text-3xl sm:text-4xl text-brand-purple">The Kid Coding</span>
+                    <span class="font-boogaloo text-3xl sm:text-4xl text-brand-coral">Class</span>
+                </div>
+
+                <!-- Tagline -->
+                <p class="text-white/70 text-lg mb-6">Where kids build real apps using AI</p>
+
+                <!-- Email -->
+                <a href="mailto:hello@thekidcodingclass.com" class="inline-flex items-center gap-2 text-brand-yellow font-semibold hover:text-white transition-colors text-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    hello@thekidcodingclass.com
+                </a>
+
+                <!-- Bottom bar -->
+                <div class="mt-12 pt-8 border-t border-white/10">
+                    <p class="text-white/40 text-sm">© 2026 The Kid Coding Class. All rights reserved. Made with 💜 for young builders.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.add('bg-brand-cream/98');
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.classList.remove('bg-brand-cream/98');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form handling (placeholder for Formspree)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            // The form will submit to Formspree naturally
+            // This is just for any additional client-side handling
+            const btn = this.querySelector('button[type="submit"]');
+            btn.innerHTML = 'Sending... 🚀';
+            btn.disabled = true;
+        });
+    </script>
+</body>
+</html>
